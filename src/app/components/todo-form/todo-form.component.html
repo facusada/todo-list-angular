@@ -1,0 +1,10 @@
+<form class="todo-form" (submit)="onSubmit($event)">
+  <input
+    type="text"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [value]="draft()"
+    (input)="onInput($event)"
+  />
+  <button type="submit">{{ buttonLabel }}</button>
+</form>

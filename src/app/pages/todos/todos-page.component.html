@@ -1,0 +1,49 @@
+<div class="layout">
+  <section class="panel">
+    <header class="panel__header">
+      <h1>Lista de tareas</h1>
+      <p>Mantene al dia tus pendientes y marca lo que ya completaste.</p>
+    </header>
+
+    <app-todo-form (add)="onAdd($event)"></app-todo-form>
+
+    <section *ngIf="todos().length; else emptyState" class="todo-section">
+      <div class="toolbar">
+        <span class="toolbar__counter">
+          {{ remainingCount() }}
+          {{ remainingCount() === 1 ? 'tarea pendiente' : 'tareas pendientes' }}
+        </span>
+
+        <div class="filters">
+          <button
+            *ngFor="let item of filters"
+            type="button"
+            [class.active]="isActive(item)"
+            (click)="setFilter(item)"
+          >
+            {{ filterLabel(item) }}
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="clear"
+          (click)="clearCompleted()"
+          [disabled]="!hasCompleted()"
+        >
+          Borrar completadas
+        </button>
+      </div>
+
+      <app-todo-list
+        [todos]="filteredTodos()"
+        (toggle)="onToggle($event)"
+        (remove)="onRemove($event)"
+      ></app-todo-list>
+    </section>
+
+    <ng-template #emptyState>
+      <p class="empty">Todavia no agregaste tareas. Escribi la primera arriba.</p>
+    </ng-template>
+  </section>
+</div>

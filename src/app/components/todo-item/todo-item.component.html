@@ -1,0 +1,7 @@
+<label>
+  <input type="checkbox" [checked]="todo.completed" (change)="onToggle()" />
+  <span>{{ todo.title }}</span>
+</label>
+<button type="button" class="delete" (click)="onRemove()" aria-label="Eliminar tarea">
+  &times;
+</button>
